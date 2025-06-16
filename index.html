@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pizarra Digital Interactiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="assets/logoSalesiana.png">
+</head>
+
+<body>
+    <header>
+        <button aria-label="Toggle navigation menu" class="menu-button" id="menuToggle" aria-expanded="false"
+            aria-controls="sidebar">
+            <span class="material-icons">menu</span>
+        </button>
+        <div class="logo" tabindex="0">Pizarra Digital Interactiva</div>
+        <div class="header-right" id="headerRight">
+            <!-- Will be populated dynamically: login/register or user info -->
+        </div>
+    </header>
+    <div id="app">
+        <aside id="sidebar" aria-label="Barra lateral de navegación" role="navigation">
+            <nav>
+                <button type="button" aria-label="Inicio" id="btnInicio" class="active" aria-pressed="true">
+                    <span class="material-icons" aria-hidden="true">home</span> Inicio
+                </button>
+                <button type="button" aria-label="Capas" id="btnCapas" aria-pressed="false">
+                    <span class="material-icons" aria-hidden="true">layers</span> Capas
+                </button>
+                <button type="button" aria-label="Herramientas" id="btnHerramientas" aria-pressed="false">
+                    <span class="material-icons" aria-hidden="true">build</span> Herramientas
+                </button>
+                <button type="button" aria-label="Colaboradores" id="btnColaboradores" aria-pressed="false">
+                    <span class="material-icons" aria-hidden="true">people</span> Colaboradores
+                </button>
+
+                <a href="mas.html" style="text-decoration: none;">
+                <button type="button" aria-label="Más">
+                    <span class="material-icons" aria-hidden="true">add_circle</span> Más
+                </button>
+                </a>
+
+                <button type="button" aria-label="Configuración" id="btnConfiguracion" aria-pressed="false">
+                    <span class="material-icons" aria-hidden="true">settings</span> Configuración
+                </button>
+
+            </nav>
+        </aside>
+        <main role="main" tabindex="0">
+            <div class="whiteboard-container" aria-label="Área de la pizarra digital">
+                <canvas id="whiteboardCanvas" aria-label="Lienzo de la pizarra digital"></canvas>
+            </div>
+        </main>
+        <section id="detailPanel" aria-live="polite" aria-atomic="true">
+            <!-- Content changes according to sidebar selection -->
+        </section>
+    </div>
+    <footer>
+        <div>© <script>document.write(new Date().getFullYear())</script> - Pizarra Digital Interactiva (Fase Inicial) - Franz Quispe</div>
+    </footer>
+    <!-- /**/ -->
+    <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+    <!-- Login Modal -->
+    <div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle"
+        tabindex="-1">
+        <div class="modal" role="document">
+            <button class="close-btn" aria-label="Cerrar login" id="closeLoginModal">&times;</button>
+            <h2 id="loginModalTitle">Iniciar Sesión</h2>
+            <form id="loginForm" novalidate>
+                <label for="loginEmail">Correo electrónico</label>
+                <input type="email" id="loginEmail" name="email" autocomplete="username" required
+                    aria-describedby="loginEmailError" />
+                <div class="error-message" id="loginEmailError" aria-live="polite"></div>
+
+                <label for="loginPassword">Contraseña</label>
+                <input type="password" id="loginPassword" name="password" autocomplete="current-password" required
+                    aria-describedby="loginPasswordError" minlength="6" />
+                <div class="error-message" id="loginPasswordError" aria-live="polite"></div>
+
+                <button class="primary-btn" type="submit" aria-live="polite" aria-atomic="true">Entrar</button>
+            </form>
+            <div class="modal-footer">
+                ¿No tienes cuenta? <button class="link-btn" id="switchToRegister">Regístrate</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal-backdrop" id="registerModal" role="dialog" aria-modal="true" aria-labelledby="registerModalTitle"
+        tabindex="-1">
+        <div class="modal" role="document">
+            <button class="close-btn" aria-label="Cerrar registro" id="closeRegisterModal">&times;</button>
+            <h2 id="registerModalTitle">Crear Cuenta</h2>
+            <form id="registerForm" novalidate>
+                <label for="registerName">Nombre completo</label>
+                <input type="text" id="registerName" name="name" autocomplete="name" required
+                    aria-describedby="registerNameError" minlength="2" />
+                <div class="error-message" id="registerNameError" aria-live="polite"></div>
+
+                <label for="registerEmail">Correo electrónico</label>
+                <input type="email" id="registerEmail" name="email" autocomplete="email" required
+                    aria-describedby="registerEmailError" />
+                <div class="error-message" id="registerEmailError" aria-live="polite"></div>
+
+                <label for="registerPassword">Contraseña</label>
+                <input type="password" id="registerPassword" name="password" autocomplete="new-password" required
+                    aria-describedby="registerPasswordError" minlength="6" />
+                <div class="error-message" id="registerPasswordError" aria-live="polite"></div>
+
+                <label for="registerConfirmPassword">Confirmar contraseña</label>
+                <input type="password" id="registerConfirmPassword" name="confirmPassword" autocomplete="new-password"
+                    required aria-describedby="registerConfirmPasswordError" minlength="6" />
+                <div class="error-message" id="registerConfirmPasswordError" aria-live="polite"></div>
+
+                <button class="primary-btn" type="submit" aria-live="polite" aria-atomic="true">Registrarse</button>
+            </form>
+            <div class="modal-footer">
+                ¿Ya tienes cuenta? <button class="link-btn" id="switchToLogin">Iniciar Sesión</button>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
